@@ -1,0 +1,46 @@
+db.getCollection('faculty').find({})
+
+db.getCollection('faculty').find({}).count()
+
+db.getCollection('faculty').find({'qualification':'Ph.D'})
+
+db.getCollection('faculty').find({'exp':{$gt:8,$lt:12}})
+
+db.getCollection('faculty').find({'subjects':{$in:[/maths/i, /networking/i ]}})
+
+db.getCollection('faculty').find(
+        {"qualification":"Ph.D",
+           "age":{$gt:30},
+           "subjects":"MATHS"}
+)
+
+db.getCollection('faculty').find(
+        {"type":"Part Time",
+           "subjects":"JAVA"}
+)
+
+db.faculty.insertOne(
+    {"name":"Suresh Babu", "age":55,"gender":"M","exp":25,subjects:["MATHS","DE"],"type":"Full Time", "qualification":"Ph.D"}
+)
+
+db.faculty.update(
+    {},{$inc:{'age':1,'exp':1}})
+
+ db.faculty.update(
+    {'name':'Sivani'},{'qualification':'Ph.D','type':'Full Time'})   
+
+db.faculty.update({"subjects":"MATHS"},{$push:{"subjects":"ML"}})
+
+db.faculty.remove({'age':{$gt:55}})
+
+db.faculty.find({},{'_id':0,'name':1,'qualification':1})
+
+db.faculty.find({},{'_id':0,'name':1,'qualification':1,'exp':1})
+
+db.faculty.find({}).sort({age:-1}).limit(5)
+
+db.faculty.find({"subjects":"JAVA"},{"name":1,"_id":0})
+
+db.faculty.find({"subjects":"JAVA"}).count(5)
+
+db.faculty.find({"subjects":"JAVA","gender":"F"}).count()
